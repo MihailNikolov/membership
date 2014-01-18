@@ -1,0 +1,78 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .style1 {
+            width: 423px;
+        }
+
+        .style2 {
+            width: 106px;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <table style="width: 100%;">
+            <tr>
+                <td class="SiteBackground" >
+                    <div align="left">
+                            <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/Default.aspx">Home </asp:HyperLink>
+                        </div>
+                        </td>
+                <td class="SiteBackground" >
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        <div align="right">
+                            <asp:LoginView ID="LoginView1" runat="server">
+                                <AnonymousTemplate>
+                                    Welcome, Guest. |
+                                <asp:LoginStatus ID="LoginStatus1" runat="server" />
+                                    or 
+                                <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Register.aspx">Register</asp:HyperLink>
+                                </AnonymousTemplate>
+                                <LoggedInTemplate>
+                                    Welcome,
+                                <asp:LoginName ID="LoginName1" runat="server" />
+                                    |
+                                <asp:LoginStatus ID="LoginStatus2" runat="server" />
+                                </LoggedInTemplate>
+                                <RoleGroups>
+                                    <asp:RoleGroup Roles="Admin">
+                                        <ContentTemplate>
+                                            Welcome, Administrator
+                                        <asp:LoginName ID="LoginName2" runat="server" />
+                                            |
+                                        <asp:LoginStatus ID="LoginStatus3" runat="server" />
+                                        </ContentTemplate>
+                                    </asp:RoleGroup>
+                                </RoleGroups>
+                            </asp:LoginView>
+                        </div>
+                    </asp:ContentPlaceHolder>
+                </td>
+            </tr>
+            <tr>
+                <td class="SiteBackground">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
+                    </asp:ContentPlaceHolder>
+                </td>
+                <td class="SiteBackground">
+                    <asp:ContentPlaceHolder ID="MainContentPlaceHolder" runat="server">
+                    </asp:ContentPlaceHolder>
+                </td>
+            </tr>
+            <tr>
+                <td class="SiteBackground" colspan="2">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+                    </asp:ContentPlaceHolder>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
