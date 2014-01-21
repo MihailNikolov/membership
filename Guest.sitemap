@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  <siteMapNode title="Home" description="Home" url="~/Default.aspx" 
+         roles="*">
+    <siteMapNode title="Guest"
+        description="Guest"
+         roles="*">
+      <siteMapNode title="Login"
+          description="Login"
+          url="~/Login.aspx"/>
+      <siteMapNode title="Register"
+         description="Register"
+         url="~/Register.aspx" />
+      <siteMapNode title="Recover Password"
+         description="Recover Password"
+         url="~/RecoverPassword.aspx"/>
+    </siteMapNode>
+  </siteMapNode>
+</siteMap>

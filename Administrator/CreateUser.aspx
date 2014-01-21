@@ -14,7 +14,7 @@
             </tr>
             <tr>
                 <td>
-                    <asp:CreateUserWizard ID="CreateUserWizard1" runat="server" LoginCreatedUser="false" OnCreatedUser="CreateUserWizard1_CreatedUser" ContinueDestinationPageUrl="~/Default.aspx">
+                    <asp:CreateUserWizard ID="CreateUserWizard1" runat="server" LoginCreatedUser="false" ContinueDestinationPageUrl="~/Administrator/Users.aspx">
                         <WizardSteps>
                             <asp:CreateUserWizardStep ID="CreateUserWizardStep1" runat="server">
                             </asp:CreateUserWizardStep>

@@ -18,9 +18,9 @@
                 <asp:LoginName ID="LoginName1" runat="server" />
                 <br />
                 <br />
-                <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/MemberPages/ChangePassword.aspx">Change password </asp:HyperLink><br />
+                <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/User/ChangePassword.aspx">Change password </asp:HyperLink><br />
                 <br />
-                <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/MemberPages/Members.aspx">Members page</asp:HyperLink>
+                <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/User/Members.aspx">Members page</asp:HyperLink>
             </LoggedInTemplate>
         </asp:LoginView>
     </div>

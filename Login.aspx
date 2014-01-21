@@ -3,7 +3,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContentPlaceHolder" runat="Server">
         <div>
-            <asp:Login ID="Login1" runat="server">
+            <asp:Login ID="Login1" runat="server" LogoutPageUrl="~/User/Members.aspx" OnLoggedIn="Login1_LoggedIn">
             </asp:Login>
         </div>
         <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="Login1" />

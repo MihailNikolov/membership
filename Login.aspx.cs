@@ -15,4 +15,10 @@ public partial class Login : System.Web.UI.Page
     {
 
     }
+    protected void Login1_LoggedIn(object sender, EventArgs e)
+    {
+
+        //MembershipUser CurrentUser = Membership.GetUser(User.Identity.Name);
+        //Session["UserId"] = CurrentUser.ProviderUserKey;
+    }
 }

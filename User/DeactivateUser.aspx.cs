@@ -22,6 +22,6 @@ public partial class MemberPages_DeactivateUser : System.Web.UI.Page
 
     public void CancelButton_OnClick(object sender, EventArgs args)
     {
-        Response.Redirect("default.aspx");
+        Response.Redirect("~\\Default.aspx");
     }
 }

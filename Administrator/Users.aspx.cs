@@ -16,11 +16,9 @@ public partial class MemberPages_Users : System.Web.UI.Page
     public void Page_Load()
     {
         if (!IsPostBack)
-        {
             GetUsers();
-            GetRoles();
-        }
     }
+
     protected virtual void OnCheckedChanged_Admin(Object sender, EventArgs e)
     {
 
@@ -29,7 +27,7 @@ public partial class MemberPages_Users : System.Web.UI.Page
             DataGridItem item = UserGrid.Items[i];
             if (item.FindControl("Admin") == sender)
             {
-                String strUserName = item.Cells[3].Text;
+                String strUserName = item.Cells[2].Text;
 
                 if (User.Identity.Name == strUserName)
                 {
@@ -55,14 +53,13 @@ public partial class MemberPages_Users : System.Web.UI.Page
         }
 
         GetUsers();
-        GetRoles();
     }
 
     protected void ItemsGrid_ItemCommand(object sender, DataGridCommandEventArgs e)
     {
         if (e.CommandName == "Deactivate")
         {
-            String strUserName = e.Item.Cells[3].Text;
+            String strUserName = e.Item.Cells[2].Text;
 
             if (!Roles.IsUserInRole(strUserName, "Admin"))
                 Membership.DeleteUser(strUserName);
@@ -73,7 +70,6 @@ public partial class MemberPages_Users : System.Web.UI.Page
             }
 
             GetUsers();
-            GetRoles();
         }
     }
 
@@ -101,7 +97,7 @@ public partial class MemberPages_Users : System.Web.UI.Page
 
         foreach (DataGridItem item in UserGrid.Items)
         {
-            String strUserName = item.Cells[3].Text;
+            String strUserName = item.Cells[2].Text;
             CheckBox oCheckBox = (CheckBox)item.FindControl("Admin");
             oCheckBox.Checked = Roles.IsUserInRole(strUserName, "Admin");
         }
@@ -120,12 +116,6 @@ public partial class MemberPages_Users : System.Web.UI.Page
             NavigationPanel.Visible = false;
         else
             NavigationPanel.Visible = true;
-    }
-
-    private void GetRoles()
-    {
-        RolesGrid.DataSource = Roles.GetUsersInRole("Admin");
-        RolesGrid.DataBind();
     }
 
     public void NextButton_OnClick(object sender, EventArgs args)

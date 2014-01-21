@@ -3,76 +3,104 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
-    <title></title>
+    <title>E-Shopaholic </title>
     <asp:ContentPlaceHolder ID="head" runat="server">
+        <link rel="stylesheet" type="text/css" href="/membership/default.css" media="screen" runat="Server"/>
     </asp:ContentPlaceHolder>
-    <style type="text/css">
-        .style1 {
-            width: 423px;
-        }
-
-        .style2 {
-            width: 106px;
-        }
-    </style>
 </head>
 <body>
-    <form id="form1" runat="server">
-        <table style="width: 100%;">
-            <tr>
-                <td class="SiteBackground" >
-                    <div align="left">
-                            <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/Default.aspx">Home </asp:HyperLink>
+    <div class="container">
+        <form id="form1" runat="server">
+            <table>
+                <tr valign="top" class="header">
+                    <td></td>
+                    <td>
+                        <div align="left">
+                            <asp:SiteMapPath ID="SiteMapPath1" runat="server" Font-Names="Lucida Sans Unicode" PathSeparator=" - ">
+                                <CurrentNodeStyle ForeColor="#333333" />
+                                <NodeStyle Font-Bold="True" ForeColor="#284E98" />
+                                <PathSeparatorStyle Font-Bold="True" ForeColor="#507CD1" />
+                                <RootNodeStyle Font-Bold="True" ForeColor="#507CD1" />
+                            </asp:SiteMapPath>
                         </div>
-                        </td>
-                <td class="SiteBackground" >
-                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </td>
+                    <td>
                         <div align="right">
                             <asp:LoginView ID="LoginView1" runat="server">
                                 <AnonymousTemplate>
                                     Welcome, Guest. |
-                                <asp:LoginStatus ID="LoginStatus1" runat="server" />
-                                    or 
-                                <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Register.aspx">Register</asp:HyperLink>
+                    <asp:LoginStatus ID="LoginStatus1" runat="server" />
+                                    or
+                    <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Register.aspx">Register</asp:HyperLink>
                                 </AnonymousTemplate>
                                 <LoggedInTemplate>
                                     Welcome,
-                                <asp:LoginName ID="LoginName1" runat="server" />
+                    <asp:LoginName ID="LoginName1" runat="server" />
                                     |
-                                <asp:LoginStatus ID="LoginStatus2" runat="server" />
+                    <asp:LoginStatus ID="LoginStatus2" runat="server" />
                                 </LoggedInTemplate>
                                 <RoleGroups>
                                     <asp:RoleGroup Roles="Admin">
                                         <ContentTemplate>
                                             Welcome, Administrator
-                                        <asp:LoginName ID="LoginName2" runat="server" />
+                            <asp:LoginName ID="LoginName2" runat="server" />
                                             |
-                                        <asp:LoginStatus ID="LoginStatus3" runat="server" />
+                            <asp:LoginStatus ID="LoginStatus3" runat="server" />
                                         </ContentTemplate>
                                     </asp:RoleGroup>
                                 </RoleGroups>
                             </asp:LoginView>
                         </div>
-                    </asp:ContentPlaceHolder>
-                </td>
-            </tr>
-            <tr>
-                <td class="SiteBackground">
-                    <asp:ContentPlaceHolder ID="ContentPlaceHolder3" runat="server">
-                    </asp:ContentPlaceHolder>
-                </td>
-                <td class="SiteBackground">
-                    <asp:ContentPlaceHolder ID="MainContentPlaceHolder" runat="server">
-                    </asp:ContentPlaceHolder>
-                </td>
-            </tr>
-            <tr>
-                <td class="SiteBackground" colspan="2">
-                    <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
-                    </asp:ContentPlaceHolder>
-                </td>
-            </tr>
-        </table>
-    </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="item">
+                            <div class="date">
+                                <div><% Response.Write(DateTime.Now.ToString("MMMM").ToUpper().Substring(0, 3)); %> </div>
+                                <span><% Response.Write(DateTime.Now.Day); %></span>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="main" colspan="2">
+                        <div class="item">
+                            <div class="content">
+                                <asp:Menu
+                                    ID="Menu1"
+                                    runat="server"
+                                    DataSourceID="SiteMapDataSource1"
+                                    Orientation="Horizontal"
+                                    StaticDisplayLevels="2"
+                                    CssClass="navigation_menu">
+                                    <DynamicHoverStyle CssClass="navigation_menu_item_hover" />
+                                    <DynamicMenuItemStyle CssClass="navigation_menu_item" />
+                                    <DynamicMenuStyle CssClass="navigation_menu" />
+                                    <DynamicSelectedStyle CssClass="navigation_menu_item" />
+                                    <StaticHoverStyle CssClass="navigation_menu_item_hover" />
+                                    <StaticMenuItemStyle CssClass="navigation_menu_static" />
+                                    <StaticSelectedStyle CssClass="navigation_menu_static" />
+                                    <StaticMenuStyle CssClass="navigation_menu" />
+                                </asp:Menu>
+                                <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" />
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="body" colspan="2">
+                        <asp:ContentPlaceHolder ID="MainContentPlaceHolder" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
 </body>
 </html>
