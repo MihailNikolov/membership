@@ -14,6 +14,10 @@ public partial class MemberPages_Members : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+        if (IsPostBack)
+            return;
+
+        MembershipUser CurrentUser = Membership.GetUser(User.Identity.Name);
+        Session["Uid"] = CurrentUser.ProviderUserKey.ToString();
     }
 }

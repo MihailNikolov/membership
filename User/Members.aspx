@@ -5,49 +5,78 @@
     <div>
         <p>My sellings
         </p>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\ASPNETDB.MDF;Integrated Security=True" ProviderName="System.Data.SqlClient" SelectCommand="SELECT [Id], [Title], [ImagePath], [Description], [Price], [DateCreated], [DateSelled] FROM [UsersSellings] WHERE ([UserId] = @UserId) ORDER BY [DateCreated] DESC">
-            <SelectParameters>
-                <asp:SessionParameter DefaultValue="-1" Name="UserId" SessionField="UserId" Type="Object" />
-            </SelectParameters>
+
+          <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:MyConnectionStringName %>" SelectCommand="SELECT [Id], [ImagePath], [Title], [Price] FROM [UsersSellings] WHERE ([UserId] = @UserId)">
+              <SelectParameters>
+                  <asp:SessionParameter DefaultValue="&quot;&quot;" Name="UserId" SessionField="Uid" Type="String" />
+              </SelectParameters>
         </asp:SqlDataSource>
 
-        <asp:ListView runat="server" ID="ProductsListView"
-            GroupItemCount="3"
-            DataSourceID="ProductsSqlDataSource" DataKeyNames="ProductID" >
-            <LayoutTemplate>
-                <table cellpadding="2" runat="server"
-                    id="tblProducts" style="height: 320px">
-                    <tr runat="server" id="groupPlaceholder">
+          <asp:ListView ID="productList" runat="server" GroupItemCount="4" DataSourceID="SqlDataSource1">
+                <EmptyDataTemplate>
+                    <table >
+                        <tr>
+                            <td>No data was returned.</td>
+                        </tr>
+                    </table>
+                </EmptyDataTemplate>
+                <EmptyItemTemplate>
+                    <td/>
+                </EmptyItemTemplate>
+                <GroupTemplate>
+                    <tr id="itemPlaceholderContainer" runat="server">
+                        <td id="itemPlaceholder" runat="server"></td>
                     </tr>
-                </table>
-                <asp:DataPager runat="server" ID="DataPager"
-                    PageSize="9">
-                    <Fields>
-                        <asp:NumericPagerField ButtonCount="3"
-                            PreviousPageText="<--"
-                            NextPageText="-->" />
-                    </Fields>
-                </asp:DataPager>
-            </LayoutTemplate>
-            <GroupTemplate>
-                <tr runat="server" id="productRow"
-                    style="height: 80px">
-                    <td runat="server" id="itemPlaceholder"></td>
-                </tr>
-            </GroupTemplate>
-            <ItemTemplate>
-                <td id="Td1" valign="top" align="center" runat="server">
-                    <asp:Image ID="ProductImage" runat="server"
-                        ImageUrl='<%#"~/images/thumbnails/" + 
-               Eval("ThumbnailPhotoFileName") %>'
-                        Height="49" /><br />
-                    <asp:HyperLink ID="ProductLink" runat="server"
-                        Target="_blank" Text='<% #Eval("Name")%>'
-                        NavigateUrl='<%#"ShowProduct.aspx?ProductID=" + 
-              Eval("ProductID") %>' />
-                </td>
-            </ItemTemplate>
-        </asp:ListView>
+                </GroupTemplate>
+                <ItemTemplate>
+                    <td id="Td1" runat="server">
+                        <table>
+                            <tr>
+                                <td>
+                                    <a href="SellingsEdit.aspx?ID=<%#Eval("Id")%>">
+                                    <img src="<%#Server.MapPath("~/UserSellings/") + Eval("ImagePath")%>" width="100" height="75" style="border: solid" />
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="SellingsEdit.aspx?ID=<%#Eval("Id")%>">
+                                        <span>
+                                            <%#:Title%>
+                                        </span>
+                                    </a>
+                                    <br />
+                                    <span>
+                                        <b>Price: </b><%#:String.Format("{0:c}", Eval("Price"))%>
+                                    </span>
+                                    <br />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </table>
+                        </p>
+                    </td>
+                </ItemTemplate>
+                <LayoutTemplate>
+                    <table style="width:100%;">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table id="groupPlaceholderContainer" runat="server" style="width:100%">
+                                        <tr id="groupPlaceholder"></tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                            </tr>
+                            <tr></tr>
+                        </tbody>
+                    </table>
+                </LayoutTemplate>
+            </asp:ListView>
 
     </div>
 </asp:Content>
