@@ -11,9 +11,10 @@
 <body>
     <div class="container">
         <form id="form1" runat="server">
-            <table>
+            <table >
                 <tr valign="top" class="header">
-                    <td></td>
+                    <td>
+                    </td>
                     <td>
                         <div align="left">
                             <asp:SiteMapPath ID="SiteMapPath1" runat="server" Font-Names="Lucida Sans Unicode" PathSeparator=" - ">
@@ -23,6 +24,7 @@
                                 <RootNodeStyle Font-Bold="True" ForeColor="#507CD1" />
                             </asp:SiteMapPath>
                         </div>
+                        <asp:Image ID="Logo" runat="server" ImageUrl="~/images/logo.jpg" Height="99px" Width="284px" />
                     </td>
                     <td>
                         <div align="right">

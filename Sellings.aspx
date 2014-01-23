@@ -1,5 +1,5 @@
 <%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
-    CodeFile="Members.aspx.cs" Inherits="MemberPages_Members" %>
+    CodeFile="Sellings.aspx.cs" Inherits="MemberPages_Sellings" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContentPlaceHolder" runat="Server">
     <div>
@@ -7,9 +7,9 @@
             My sellings
         </p>
 
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:MyConnectionStringName %>" SelectCommand="SELECT [Id], [ImagePath], [Title], [Price], [DateSelled], [BuyerEmail] FROM [UsersSellings] WHERE ([UserId] = @UserId)">
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:MyConnectionStringName %>" SelectCommand="SELECT * FROM [UsersSellings] WHERE ([DateSelled] = @DateSelled)">
             <SelectParameters>
-                <asp:SessionParameter DefaultValue="&quot;&quot;" Name="UserId" SessionField="Uid" Type="String" />
+                <asp:Parameter DefaultValue="1753-01-01 00:00:00.000" Name="DateSelled" Type="DateTime" />
             </SelectParameters>
         </asp:SqlDataSource>
 
@@ -37,14 +37,13 @@
                                 <asp:HyperLink ID="HyperLink2"
                                     runat="Server"
                                     NavigateUrl='<%# "~/SellingsView.aspx?ID=" + Eval("Id")%>'>
-                                    <asp:Image ID="Image2"
+                                    <asp:Image ID="Image1"
                                         ImageUrl='<%# "~/UserSellings/" + ProcessMyDataItem(Eval("ImagePath"))%>'
                                         runat="Server"
                                         Width="100"
                                         Height="75"
                                         Style="border: solid" />
                                 </asp:HyperLink>
-                                </a>
                             </td>
                         </tr>
                         <tr>
@@ -52,15 +51,11 @@
                                 <asp:HyperLink ID="HyperLink1"
                                     runat="Server"
                                     NavigateUrl='<%# "~/SellingsView.aspx?ID=" + Eval("Id")%>'>
-                                    <span>
                                         <%#:Eval("Title")%>
-                                    </span>
                                 </asp:HyperLink>
-                                </a>
                                 <br />
                                 <span>
                                     <b>Price: </b><%#:String.Format("{0:c}", Eval("Price"))%>
-                                    <%#IsBought(Eval("DateSelled") ,Eval("BuyerEmail"))%>
                                 </span>
                                 <br />
                             </td>
@@ -90,6 +85,6 @@
                 </table>
             </LayoutTemplate>
         </asp:ListView>
-        <asp:LinkButton CssClass="ShopaButton" runat="Server" />
+
     </div>
 </asp:Content>

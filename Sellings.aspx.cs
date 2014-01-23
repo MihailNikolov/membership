@@ -9,19 +9,21 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 using System.Data.SqlClient;
-using System.Data.SqlTypes;
 
-public partial class MemberPages_Members : System.Web.UI.Page
+public partial class MemberPages_Sellings : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
         if (IsPostBack)
             return;
 
-        MembershipUser CurrentUser = Membership.GetUser(User.Identity.Name);
-        Session["Uid"] = CurrentUser.ProviderUserKey.ToString();
-    }
+        if (User.Identity.IsAuthenticated)
+        {
 
+            MembershipUser CurrentUser = Membership.GetUser(User.Identity.Name);
+            Session["Uid"] = CurrentUser.ProviderUserKey.ToString();
+        }
+    }
     public string ProcessMyDataItem(object myValue)
     {
         Guid str = (Guid)myValue;
@@ -31,12 +33,5 @@ public partial class MemberPages_Members : System.Web.UI.Page
         }
 
         return myValue.ToString();
-    }
-
-    public String IsBought(object DateSelled, object BuyerEmail)
-    {
-        DateTime dt = (DateTime)DateSelled;
-        string Bought = (dt == SqlDateTime.MinValue ? "" : "<br>This item is bought by<br>" + (string)BuyerEmail);
-        return Bought;
     }
 }

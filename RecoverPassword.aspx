@@ -10,6 +10,7 @@
         </p>
         <p>
             <asp:PasswordRecovery ID="PasswordRecovery1" runat="server" >
+                <SubmitButtonStyle CssClass="ShopaButton" />
             </asp:PasswordRecovery>
             &nbsp;
         </p>

@@ -8,6 +8,8 @@
         </h1>
         <p>
             <asp:ChangePassword ID="ChangePassword1" runat="server" ContinueDestinationPageUrl="~/Default.aspx" OnCancelButtonClick="ChangePassword1_CancelButtonClick" >
+                <CancelButtonStyle CssClass="ShopaButton" />
+                <ChangePasswordButtonStyle CssClass="ShopaButton" />
             </asp:ChangePassword>
             &nbsp;</p>
     </div>

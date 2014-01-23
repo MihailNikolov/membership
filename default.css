@@ -76,7 +76,7 @@ h1,h2,h3 {color: #654;}
 
 /* header */
 .header {
-	height: 180px;
+	height: 100px;
 	margin: 0 auto;
 	width: 630px;
 }
@@ -164,6 +164,12 @@ h1,h2,h3 {color: #654;}
     color: #553;
     display: block;
     padding: 8px 4px 8px 12px;
+    text-decoration: none;
+}
+
+.ShopaButton {
+    background: #E8F6BF url(/membership/images/bgnavigation.gif) repeat-x;
+    color: #553;
     text-decoration: none;
 }
 

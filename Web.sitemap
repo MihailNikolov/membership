@@ -2,12 +2,19 @@
 <siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
   <siteMapNode title="Home" description="Home" url="~/Default.aspx" 
          roles="*">
+    <siteMapNode title="Offers"
+         description="Offers"
+         url="~/Sellings.aspx"
+        roles="*"/>
     <siteMapNode title="User"
         description="User"
         roles="*">
-      <siteMapNode title="Members"
-           description="Members"
+      <siteMapNode title="My Offers"
+           description="My Offers"
            url="~/User/Members.aspx"/>
+      <siteMapNode title="Add Offer"
+           description="Add Offer"
+           url="~/User/SellingsAdd.aspx"/>
       <siteMapNode title="Deactivate User"
        description="Deactivate User"
        url="~/User/DeactivateUser.aspx"/>

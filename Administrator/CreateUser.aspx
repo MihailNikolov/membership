@@ -15,6 +15,7 @@
             <tr>
                 <td>
                     <asp:CreateUserWizard ID="CreateUserWizard1" runat="server" LoginCreatedUser="false" ContinueDestinationPageUrl="~/Administrator/Users.aspx">
+                        <CreateUserButtonStyle CssClass="ShopaButton" />
                         <WizardSteps>
                             <asp:CreateUserWizardStep ID="CreateUserWizardStep1" runat="server">
                             </asp:CreateUserWizardStep>

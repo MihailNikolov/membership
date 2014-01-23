@@ -7,12 +7,25 @@
             <td>Заглавие:</td>
             <td>
                 <asp:TextBox ID="SellingTitle" CssClass="ShopaField" runat="server" Width="211px" /></td>
+                <asp:RangeValidator id="RangeValidator1" runat="server"
+                                    ControlToValidate="Price"
+                                    MaximumValue="2000"
+                                    MinimumValue="1"
+                                    Type="String"
+                                    ErrorMessage="* Enter correct title"
+                                    Display="static">*</asp:RangeValidator>
         </tr>
         <tr>
             <td>Цена:</td>
             <td>
                 <asp:TextBox ID="Price" CssClass="ShopaField" runat="server" Width="212px" />
-
+                <asp:RangeValidator id="valRange" runat="server"
+                                    ControlToValidate="Price"
+                                    MaximumValue="1000000"
+                                    MinimumValue="0"
+                                    Type="Double"
+                                    ErrorMessage="* Enter correct price 0 - 1000000"
+                                    Display="static">*</asp:RangeValidator>
             </td>
         </tr>
         <tr>
@@ -28,7 +41,7 @@
             </td>
         </tr>
         <tr>
-            <td colspan="2">
+            <td colspan="2" align="right">
                 <asp:Button ID="btnUpload" runat="server" CssClass="ShopaButton" Text="Запази" OnClick="btnUpload_Click" />
             </td>
         </tr>

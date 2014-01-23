@@ -26,18 +26,17 @@ public partial class MemberPages_SellingsEdit : System.Web.UI.Page
 
                     SqlCommand command = new SqlCommand("SELECT [Id], [ImagePath] ,[Title], [Description], [Price] FROM [UsersSellings] Where [Id] = @Id", con);
 
-                    int Id = (int)Session["SellId"];
-                    command.Parameters.AddWithValue("@Id", Id);
+                    command.Parameters.AddWithValue("@Id", Request.QueryString["Id"]);
 
                     SqlDataReader reader = command.ExecuteReader();
                     using (reader)
                     {
                         if (reader.Read())
                         {
-                            SellingTitle.Text = reader.GetString(3);
-                            Description.Text = reader.GetString(4);
-                            Price.Text = reader.GetDecimal(5).ToString();
-                            Session["PictureGuid"] = reader.GetString(2);
+                            ViewState["PictureGuid"] = reader.GetGuid(1);
+                            SellingTitle.Text = reader.GetString(2);
+                            Description.Text = reader.GetString(3);
+                            Price.Text = reader.GetDouble(4).ToString();
                         }
                     }
                 }
@@ -50,41 +49,36 @@ public partial class MemberPages_SellingsEdit : System.Web.UI.Page
 
     protected void btnUpload_Click(object sender, EventArgs e)
     {
-        string PicturePath = "";
+        Guid guid = (Guid)ViewState["PictureGuid"];
+        if (guid != Guid.Empty)
+            File.Delete(Server.MapPath("~/UserSellings/") + guid.ToString());
+
         if (fileuploadImage.HasFile)
         {
-            Guid g;
-            g = Guid.NewGuid();
-            
+            if (guid == Guid.Empty)
+                guid = Guid.NewGuid();
+
             int length = fileuploadImage.PostedFile.ContentLength;
             byte[] imgbyte = new byte[length];
             HttpPostedFile img = fileuploadImage.PostedFile;
             img.InputStream.Read(imgbyte, 0, length);
 
-            PicturePath = g.ToString();
-
-            FileStream file = File.Create(Server.MapPath("~/UserSellings/") + PicturePath);
+            FileStream file = File.Create(Server.MapPath("~/UserSellings/") + guid.ToString());
             file.Write(imgbyte, 0, length);
         }
-
-        string oldPic = (string)Session["PictureGuid"];
-
-        if (oldPic != null && oldPic.Length > 0)
-            File.Delete(Server.MapPath("~/UserSellings/") + oldPic);
 
         string connStr = ConfigurationManager.ConnectionStrings["MyConnectionStringName"].ConnectionString;
         SqlConnection connection = new SqlConnection(connStr);
         connection.Open();
 
-        SqlCommand command = new SqlCommand("UPDATE UsersSellings SET [ImagePath] = @Path ,[Title]= @Title, [Description]= @Description, [Price] = @Price WHERE ID = @Id", connection);
-
+        SqlCommand command = new SqlCommand("UPDATE UsersSellings SET [ImagePath] = @Path, [Title]= @Title, [Description]= @Description, [Price] = @Price WHERE ID = @Id", connection);
+        
+        command.Parameters.AddWithValue("@Path", guid);
         command.Parameters.AddWithValue("@Title", SellingTitle.Text);
         command.Parameters.AddWithValue("@Price", Price.Text);
-        command.Parameters.AddWithValue("@Path", PicturePath );
         command.Parameters.AddWithValue("@Description", Description.Text);
-        
-        int Id = (int)Session["Id"];
-        command.Parameters.AddWithValue("@Id", Id);
+
+        command.Parameters.AddWithValue("@Id", Request.QueryString["Id"]);
 
         command.ExecuteNonQuery();
         connection.Close();

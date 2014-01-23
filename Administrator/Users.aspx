@@ -40,7 +40,7 @@
                         Font-Names="Lucida Sans Unicode">
 
                         <Columns>
-                            <asp:ButtonColumn HeaderText="Deactivate" ButtonType="PushButton" Text="Deactivate" CommandName="Deactivate" />
+                            <asp:ButtonColumn HeaderText="Deactivate" ItemStyle-CssClass="ShopaButton" ButtonType="PushButton" Text="Deactivate" CommandName="Deactivate" />
                             <asp:TemplateColumn HeaderText="Admin">
                                 <ItemTemplate>
                                     <asp:CheckBox ID="Admin" OnCheckedChanged="OnCheckedChanged_Admin" runat="server" AutoPostBack="true" />
